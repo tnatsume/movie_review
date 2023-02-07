@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
+use \Symfony\Component\HttpFoundation\Response;
 
 class MovieController extends Controller
 {
@@ -11,9 +13,14 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        //
+        if($req->serch_string){
+            $movies = Movie::GetAllDataSerchString($req->serch_string);
+        } else{
+            $movies = Movie::GetAllData();
+        }
+        return response()->json($movies, 200);
     }
 
     /**

@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->boolean('display_flg')->default(false);
             $table->string('movie_title')->comment('映画のタイトル');
-            $table->text('movie_content')->comment('映画の内容');
+            $table->text('movie_content')->comment('映画の内容')->nullable();
             $table->string('movie_pic')->comment('映画の写真')->nullable();
             $table->float('movie_evaluation')->comment('評価');
             $table->string('movie_url')->comment('映画サイトのurl')->nullable();
+            $table->text('search_text')->comment('検索するときに用いる');
             $table->timestamps();
         });
     }
